@@ -21,7 +21,7 @@ public class DisclosureAttackSimulation {
 		this.N = N;
 	}
 	
-	public ArrayList<Integer> generateObservation() {
+	private ArrayList<Integer> generateObservation() {
 		Random rand =  new Random();
 		int communicationPartnerOfAlice = rand.nextInt(m + 1) + 1;
 		ArrayList<Integer> receivers = new ArrayList<Integer>();
@@ -38,8 +38,30 @@ public class DisclosureAttackSimulation {
 		return receivers;
 	}
 	
+	private int learningPhase() {
+		int t = 0;
+		ArrayList<ArrayList<Integer>> listOfObservations = new ArrayList<ArrayList<Integer>>();
+		ArrayList<ArrayList<Integer>> disjointSets = new ArrayList<ArrayList<Integer>>();
+		while(disjointSets.size() == 0) {
+			t++;
+			ArrayList<Integer> observation = generateObservation();
+			listOfObservations.add(observation);
+			disjointSets = findDisjointSets(listOfObservations, m);
+		}
+		
+		return t;
+	}
+	
+	private ArrayList<ArrayList<Integer>> findDisjointSets(ArrayList<ArrayList<Integer>> list, int m) {
+		ArrayList<ArrayList<Integer>> disjointSets = new ArrayList<ArrayList<Integer>>();
+		return disjointSets;
+	}
+	
+	
+	
 	public static void main(String[] args) {
 		DisclosureAttackSimulation da = new DisclosureAttackSimulation(10, 10, 100);
 		da.generateObservation();
+		da.learningPhase();
 	}
 }
